@@ -99,7 +99,7 @@ function Article() {
   return (
     <Layout
       page="info"
-      title={pageContent.timeRead}
+      title={pageContent.title}
       description={pageContent.shortDescription}
       keywords="home, welcome, quality content, resources, articles, community, Hoobe"
     >
