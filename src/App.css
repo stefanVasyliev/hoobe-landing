@@ -1,0 +1,222 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.single-article-content article > :first-child > *,
+.single-article-content article > :first-child {
+  margin-top: 0;
+}
+
+.single-article-content {
+  color: black;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: start;
+}
+
+.single-article-content {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  line-height: 1.7;
+}
+
+.single-article-content p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.single-article-content h2,
+.single-article-content h3,
+.single-article-content h4,
+.single-article-content h5,
+.single-article-content h6 {
+  color: #1a1a1a;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  line-height: 124%;
+}
+
+.single-article-content h2 {
+  font-size: 24px;
+}
+
+.single-article-content h3,
+.single-article-content h4,
+.single-article-content h5,
+.single-article-content h6 {
+  font-size: 20px;
+}
+
+.single-article-content ul,
+.single-article-content ol {
+  margin: 1.5em 0;
+  padding-left: 2em;
+}
+
+.single-article-content ul li,
+.single-article-content ol li {
+  font-size: 18px;
+  margin-bottom: 0.5em;
+}
+
+.single-article-content ul li::marker,
+.single-article-content ol li::marker {
+  color: initial;
+}
+
+.single-article-content ol li::before {
+  content: none;
+}
+
+.single-article-content blockquote {
+  font-size: 20px;
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #000;
+  margin: 1.5em 0;
+  padding-left: 1.5em;
+}
+
+.single-article-content img {
+  max-width: 100%;
+  width: 100%;
+  border-radius: 43px;
+  height: auto;
+  margin: 1.5em 0;
+  object-fit: cover;
+  max-height: 600px;
+}
+
+.single-article-content a {
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.single-article-content a:hover {
+  text-decoration: none;
+}
+
+.single-article-content pre,
+.single-article-content code {
+  background-color: #f4f4f4;
+  padding: 0.2em 0.4em;
+  font-size: 16px;
+  font-family: "Courier New", monospace;
+  border-radius: 4px;
+}
+
+.single-article-content pre {
+  padding: 1em;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.single-article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.single-article-content table th,
+.single-article-content table td {
+  padding: 0.8em;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.single-article-content table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.single-article-content figure {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+.single-article-content figcaption {
+  font-size: 16px;
+  color: #666;
+  margin-top: 0.5em;
+}
+
+.single-article-content hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2em 0;
+}
+
+.single-article-content .video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin: 1.5em 0;
+}
+
+.single-article-content .video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.single-article-content blockquote ul,
+.single-article-content blockquote ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+.single-article-content blockquote ul li,
+.single-article-content blockquote ol li {
+  font-size: 18px;
+}
+
+.single-article-content sup {
+  font-size: 14px;
+  vertical-align: super;
+  line-height: 0;
+}
