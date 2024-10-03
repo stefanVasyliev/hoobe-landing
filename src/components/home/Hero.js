@@ -193,6 +193,7 @@ const Hero = () => {
           sx={{
             '@media (max-height: 800px)': {
               maxWidth: '200px',
+              w: "200px"
             },
             '@media (max-height: 700px)': {
               display: 'none',
