@@ -192,7 +192,6 @@ const Hero = () => {
           transition="transform 0.3s ease-out"
           sx={{
             '@media (max-height: 800px)': {
-              maxWidth: '200px',
               w: "200px"
             },
             '@media (max-height: 700px)': {
