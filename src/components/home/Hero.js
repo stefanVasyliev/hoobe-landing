@@ -96,10 +96,10 @@ const Hero = () => {
 
   return (
     <Flex
-      height={{ base: "100dvh", lg: "100dvh" }}
-      minH={{ base: "auto", lg: "1000px" }}
+      height="100dvh"
+      minH={{ base: "auto", lg: "600px" }}
       justifyContent="start"
-      alignItems={{ base: "start", lg: "center" }}
+      alignItems={{ base: "center", lg: "center" }}
       position="relative"
       overflow="hidden"
       backgroundImage={`url(${heroBG})`}
@@ -107,8 +107,9 @@ const Hero = () => {
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       ref={containerRef}
+      p="100px 20px 30px"
     >
-      <Flex position="relative" flexDirection={{ base: "column-reverse", lg: "row" }} maxW="1290px" w="100%" m="0 auto" textAlign="left" alignItems="center" p="30px 20px">
+      <Flex position="relative" gap="40px" justifyContent={{ base: "center", lg: "start" }} alignItems="center" flexDirection={{ base: "column-reverse", lg: "row" }} maxW="1290px" w="100%" m="0 auto" textAlign="left" >
         <InView triggerOnce>
           {({ inView, ref }) => (
             <motion.div
@@ -119,7 +120,7 @@ const Hero = () => {
               exit="exit"
               transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <Box maxW="578px" mt={{ base: "40px", lg: "0" }}>
+              <Box maxW="578px" mt={{ base: "0", lg: "0" }}>
                 <Heading as="h1" letterSpacing="-2px" textAlign={{ base: "center", lg: "start" }} fontWeight="800" fontSize={{ base: "40px", md: "66px" }} mb={{ base: "12px", lg: "20px" }} lineHeight="120%">
                   more than just <br /> a link, it's your <br /> <Text color="grays.white">home on the web</Text>
                 </Heading>
@@ -184,12 +185,24 @@ const Hero = () => {
           position={{ base: "relative", lg: "absolute" }}
           maxWidth={{ base: "350px", lg: "740px" }}
           top={{ base: "auto", lg: "50%" }}
-          mt={{ base: "70px", lg: "0" }}
           right={{ base: "auto", lg: "-50px" }}
           willChange="transform"
           transform={`perspective(5000px) translate3d(${windowWidth > 991 ? "0, -50%" : "0, 0"}, 0px) scale3d(1, 1, 1) rotateX(${rotateX > 15 ? 15 : rotateX < -15 ? -15 : rotateX}deg) rotateY(${rotateY > 15 ? 15 : rotateY < -15 ? -15 : rotateY}deg) rotateZ(0deg) skew(0deg, 0deg)`}
           transformStyle="preserve-3d"
           transition="transform 0.3s ease-out"
+          sx={{
+            '@media (max-height: 800px)': {
+              maxWidth: '200px',
+            },
+            '@media (max-height: 700px)': {
+              display: 'none',
+            },
+            '@media (min-width: 991px) and (max-width: 1250px)': {
+              maxWidth: '400px',
+              right: '0',
+            },
+          }}
+
         >
           <Image
             src={heroImg1}
@@ -201,10 +214,22 @@ const Hero = () => {
         <Box
           zIndex="20"
           w={{ base: "calc(100% - 40px)", lg: "100%" }}
+          sx={{
+            '@media (max-height: 800px)': {
+              w: '200px',
+            },
+            '@media (max-height: 700px)': {
+              display: 'none',
+            },
+            '@media (min-width: 991px) and (max-width: 1250px)': {
+              maxWidth: '400px',
+              right: '0',
+            },
+          }}
           transformOrigin="center center"
           position="absolute"
           maxWidth={{ base: "350px", lg: "740px" }}
-          top={{ base: "100px", lg: "50%" }}
+          top={{ base: "0", lg: "50%" }}
           right={{ base: "50%", lg: "-50px" }}
           willChange="transform"
           transform={`perspective(5000px) translate3d(${windowWidth > 991 ? "0, -50%" : "50%, 0"}, 0px) scale3d(1, 1, 1) rotateX(${rotateX > 15 ? 15 : rotateX < -15 ? -15 : rotateX * 0.5}deg) rotateY(${rotateY > 15 ? 15 : rotateY < -15 ? -15 : rotateY * 0.5}deg) rotateZ(0deg) skew(0deg, 0deg)`}
@@ -223,9 +248,21 @@ const Hero = () => {
           transformOrigin="center center"
           position="absolute"
           maxWidth={{ base: "350px", lg: "740px" }}
-          top={{ base: "100px", lg: "50%" }}
+          top={{ base: "0", lg: "50%" }}
           right={{ base: "50%", lg: "-50px" }}
           w={{ base: "calc(100% - 40px)", lg: "100%" }}
+          sx={{
+            '@media (max-height: 800px)': {
+              w: '200px',
+            },
+            '@media (max-height: 700px)': {
+              display: 'none',
+            },
+            '@media (min-width: 991px) and (max-width: 1250px)': {
+              maxWidth: '400px',
+              right: '0',
+            },
+          }}
           willChange="transform"
           transform={`perspective(5000px) translate3d(${windowWidth > 991 ? "0, -50%" : "50%, 0"}, 0px) scale3d(1, 1, 1) rotateX(${rotateX > 15 ? 15 : rotateX < -15 ? -15 : rotateX}deg) rotateY(${rotateY > 15 ? 15 : rotateY < -15 ? -15 : rotateY}deg) rotateZ(0deg) skew(0deg, 0deg)`}
           transformStyle="preserve-3d"

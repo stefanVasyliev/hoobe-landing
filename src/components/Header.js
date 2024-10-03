@@ -103,10 +103,10 @@ function Header({ page }) {
 
               <Flex alignItems="center" gap={2}>
                 <Flex display="flex" gap={2} alignItems="center">
-                  <Link fontWeight="500" display="flex" alignItems="center" justifyContent="center" href="/login" borderRadius="full" h="40px" p={{ base: "0 16px", md: "0" }} width={{ base: "auto", md: "146px" }} borderWidth="1px" bg="white" _hover={{ bg: "#E2E8F0" }}>
+                  <Link fontWeight="500" display="flex" alignItems="center" justifyContent="center" href="/login" borderRadius="full" h="40px" p={{ base: "0 10px", md: "0" }} width={{ base: "auto", md: "146px" }} borderWidth="1px" bg="white" _hover={{ bg: "#E2E8F0" }}>
                     login
                   </Link>
-                  <Link href="/signup" fontWeight="500" display="flex" alignItems="center" justifyContent="center" borderRadius="full" h="40px" p={{ base: "0 16px", md: "0" }} width={{ base: "auto", md: "146px" }} color="white" bg="black" _hover={{ bg: "#222429" }}>
+                  <Link href="/signup" fontWeight="500" display="flex" alignItems="center" justifyContent="center" borderRadius="full" h="40px" p={{ base: "0 10px", md: "0" }} width={{ base: "auto", md: "146px" }} color="white" bg="black" _hover={{ bg: "#222429" }}>
                     get started
                   </Link>
                 </Flex>
