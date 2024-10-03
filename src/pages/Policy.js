@@ -68,6 +68,7 @@ function Policy() {
     onClose()
     const element = document.getElementById(id);
     if (element) {
+      onClose()
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = window.pageYOffset + elementPosition - 100;
 
