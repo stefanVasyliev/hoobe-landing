@@ -119,7 +119,7 @@ function Policy() {
             letterSpacing="-1.5px"
             maxW="800px"
           >
-            {pageContent.title}
+            {pageContent.Title}
           </Heading>
         </Flex>
 
