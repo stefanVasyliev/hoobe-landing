@@ -79,7 +79,11 @@ function Terms() {
 
 
   return (
-    <Layout page="info" >
+    <Layout page="info"
+      title="Terms of Service - Hoobe"
+      description="Read our Terms of Service to understand your rights and obligations when using Hoobe. Your privacy and security are our top priority."
+      keywords="terms of service, user agreement, conditions, policies, Hoobe"
+    >
       <Box
         position="relative"
         maxW="1290px"

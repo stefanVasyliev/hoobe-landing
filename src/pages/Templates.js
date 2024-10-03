@@ -51,7 +51,12 @@ function Templates() {
   };
 
   return (
-    <Layout page="templates">
+    <Layout
+      page="templates"
+      title="Premium Templates for Every Need - Hoobe"
+      description="Browse our collection of high-quality templates designed for various purposes. Customize and download to kickstart your projects effortlessly with Hoobe."
+      keywords="templates, premium templates, customizable, design templates, resources, Hoobe"
+    >
       <Box
         position="relative"
         maxW="1290px"

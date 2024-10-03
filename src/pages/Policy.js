@@ -79,7 +79,11 @@ function Policy() {
 
 
   return (
-    <Layout page="info">
+    <Layout page="info"
+      title="Privacy Policy - Your Data Protection at Hoobe"
+      description="Learn how we protect your personal information and your rights regarding your data. Your privacy matters to us at Hoobe"
+      keywords="privacy policy, data protection, personal information, user rights, Hoobe"
+    >
       <Box
         position="relative"
         maxW="1290px"

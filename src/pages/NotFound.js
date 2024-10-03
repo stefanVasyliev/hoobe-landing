@@ -5,7 +5,12 @@ import { Heading, Flex, Link } from "@chakra-ui/react";
 function NotFound() {
 
   return (
-    <Layout page="info">
+    <Layout
+      page="info"
+      title="Oops! Page Not Found - Hoobe"
+      description="We're sorry, but the page you're looking for doesn't exist. Return to the homepage or explore our other resources at Hoobe."
+      keywords="404, page not found, error, homepage, resources, Hoobe"
+    >
       <Flex
         position="relative"
         maxW="1290px"

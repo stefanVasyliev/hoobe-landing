@@ -97,7 +97,12 @@ function Article() {
   if (!pageContent) return null;
 
   return (
-    <Layout page="info">
+    <Layout
+      page="info"
+      title={pageContent.timeRead}
+      description={pageContent.shortDescription}
+      keywords="home, welcome, quality content, resources, articles, community, Hoobe"
+    >
       <Box
         position="relative"
         maxW="1290px"

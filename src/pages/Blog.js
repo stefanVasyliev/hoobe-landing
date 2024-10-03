@@ -58,7 +58,11 @@ function Blog() {
   };
 
   return (
-    <Layout page="blog">
+    <Layout
+      page="blog"
+      title="Explore Our Blog - Insights, Tips, and Trends at Hoobe"
+      description="Dive into our blog for the latest insights, expert tips, and trends in your industry. Stay informed and inspired with Hoobe"
+      keywords="blog, insights, tips, trends, articles, expert advice, Hoobe">
       <Box
         position="relative"
         maxW="1290px"
