@@ -5,9 +5,7 @@ import ContactForm from "../components/home/ContactForm";
 import ArticleCard from "../components/ArticleCard";
 import { motion } from "framer-motion";
 import { InView } from 'react-intersection-observer';
-
-const fields = ["createdAt", "title", "slug", "shortDescription"];
-const fieldsQuery = fields.map((field, index) => `&fields[${index}]=${field}`).join("");
+import { fetchRequest } from '../../src/api';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,69 +20,41 @@ function Blog() {
   const [pagination, setPagination] = useState();
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_HOST + `/api/tags?populate=*`)
-      .then((response) => response.json())
-      .then(({ data }) => setCategories(["all", ...data.map((tag) => tag.tagName)]))
-      .catch((error) => console.log(error));
 
-    fetch(
-      `${process.env.REACT_APP_API_HOST}/api/articles?pagination[page]=1&pagination[pageSize]=10&populate=*` +
-      fieldsQuery
-    )
-      .then((response) => response.json())
-      .then(({ data, meta }) => {
-        setPagination(meta.pagination);
+    const getData = async () => {
+      try {
+        const tagsData = await fetchRequest(`tags?populate=*`);
+        setCategories(["all", ...tagsData.data.map((tag) => tag.tagName)]);
 
-        setFilteredArticles(
-          data.map((article) => ({
-            ...article,
-            previewImage: `${process.env.REACT_APP_API_HOST}${article.previewImage.formats.medium.url}`,
-          }))
-        );
-      })
-      .catch((error) => console.log(error));
+        const articlesData = await fetchRequest(`articles?pagination[page]=1&pagination[pageSize]=10&populate=*`);
+        setPagination(articlesData.meta.pagination);
+        setFilteredArticles(articlesData.data)
+
+      } catch (err) {
+      } finally { }
+    }
+
+    getData();
   }, []);
 
   const filterArticles = async (category) => {
-    await fetch(
-      process.env.REACT_APP_API_HOST +
-      `/api/articles?${category === "all" ? "" : `filters[tags][tagName]=${category}&`
-      }pagination[page]=1&pagination[pageSize]=10&populate=*` +
-      fieldsQuery
-    )
-      .then((response) => response.json())
-      .then(({ data, meta }) => {
-        setActCategory(category);
-        setPagination(meta.pagination);
-        setFilteredArticles(
-          data.map((article) => ({
-            ...article,
-            previewImage: `${process.env.REACT_APP_API_HOST}${article.previewImage.url}`,
-          }))
-        );
-      })
-      .catch((error) => console.log(error));
+    try {
+      const articlesData = await fetchRequest(`articles?${category === "all" ? "" : `filters[tags][tagName]=${category}&`}pagination[page]=1&pagination[pageSize]=10&populate=*`);
+      setActCategory(category);
+      setPagination(articlesData.meta.pagination);
+      setFilteredArticles(articlesData.data);
+    } catch (err) {
+    } finally { }
   };
 
-  const getMoreArticles = () => {
-    fetch(
-      `${process.env.REACT_APP_API_HOST}/api/articles?pagination[page]=${pagination?.page + 1
-      }&pagination[pageSize]=10&populate=*${actCategory === "all" ? `` : `&filters[tags][tagName]=${actCategory}`}` +
-      fieldsQuery
-    )
-      .then((response) => response.json())
-      .then(({ data, meta }) => {
-        setPagination(meta.pagination);
+  const getMoreArticles = async () => {
+    try {
+      const articlesData = await fetchRequest(`articles?pagination[page]=${pagination?.page + 1}&pagination[pageSize]=10&populate=*${actCategory === "all" ? `` : `&filters[tags][tagName]=${actCategory}`}`);
+      setPagination(articlesData.meta.pagination);
 
-        setFilteredArticles([
-          ...filteredArticles,
-          ...data.map((article) => ({
-            ...article,
-            previewImage: `${process.env.REACT_APP_API_HOST}${article.previewImage.formats.medium.url}`,
-          })),
-        ]);
-      })
-      .catch((error) => console.log(error));
+      setFilteredArticles([...filteredArticles, ...articlesData.data]);
+    } catch (err) {
+    } finally { }
   };
 
   return (

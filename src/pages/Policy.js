@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { Heading, Box, Flex, Text, Drawer, DrawerOverlay, DrawerContent, DrawerBody, useDisclosure } from "@chakra-ui/react";
 import { DateTime } from "luxon";
 import useWindowWidth from '../hooks/useWindowWidth';
+import { fetchRequest } from '../../src/api';
 
 function Policy() {
   const windowWidth = useWindowWidth();
@@ -10,14 +11,11 @@ function Policy() {
   const [headings, setHeadings] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_HOST + `/api/privacy-olicy`)
-      .then((response) => response.json())
-
-      .then(({ data }) => {
+    const getData = async () => {
+      try {
+        const { data } = await fetchRequest(`privacy-olicy`);
         if (data.id) {
-
           const resultHtml = data.content.replace(
             /<h([1-6])>(.*?)<\/h\1>/g,
             (match, level, text) => {
@@ -25,7 +23,7 @@ function Policy() {
               const id = originalText.toLowerCase()
                 .replace(/^[\W\d]{0,4}/, "")
                 .replace(/\s+/g, "-")
-                .replace(/[^\w\-]/g, "");
+                .replace(/[^\w-]/g, "");
               return `<h${level} id="${id}">${originalText}</h${level}>`;
             }
           );
@@ -59,10 +57,11 @@ function Policy() {
 
           setHeadings(newHeadings);
         }
-      })
-      .catch((error) => console.log(error));
+      } catch (err) {
+      } finally { }
+    }
 
-
+    getData();
   }, []);
 
   const smoothScrollTo = (id) => {
@@ -164,7 +163,7 @@ function Policy() {
                 position="fixed"
                 bottom="0"
                 alignItems="center"
-                  zIndex="100"
+                zIndex="100"
                 backgroundColor="white.reg"
                 w="100%"
                 p="20px"

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { Heading, Box, Flex, Link } from "@chakra-ui/react";
+import { Heading, Flex, Link } from "@chakra-ui/react";
 
 function NotFound() {
 

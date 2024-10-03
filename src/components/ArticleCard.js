@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { motion } from "framer-motion";
 
 function ArticleCard({ article, type }) {
+  console.log(article)
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -11,11 +12,11 @@ function ArticleCard({ article, type }) {
       transition={{ duration: 1 }}
     >
       <Flex gap={{ base: "20px", md: "40px" }} alignItems="center" flexDirection={type === "horizon" ? { base: "column", md: "row" } : "column"}>
-        <Link w="100%" minW={{ "base": "100%", md: "300px" }} h="100%" maxW={{ base: "100%", md: type === "horizon" ? "350px" : "" }} href={`/article/${article.slug}`} _hover={{ textDecoration: "none" }}>
+        {!!article?.previewImage?.url && <Link w="100%" minW={{ "base": "100%", md: "300px" }} h="100%" maxW={{ base: "100%", md: type === "horizon" ? "350px" : "" }} href={`/article/${article.slug}`} _hover={{ textDecoration: "none" }}>
           <Flex borderRadius={{ base: 18, md: 34 }} overflow="hidden">
-            <Image src={article.previewImage} />
+            <Image src={article.previewImage.url} />
           </Flex>
-        </Link>
+        </Link>}
 
         <Flex alignItems="start" w={type === "horizon" ? { base: "100%", md: "calc(100% - 200px)" } : ""} flexDirection="column">
           <Flex

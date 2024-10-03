@@ -106,7 +106,7 @@ function Header({ page }) {
                   <Link fontWeight="500" display="flex" alignItems="center" justifyContent="center" href="/login" borderRadius="full" h="40px" p={{ base: "0 16px", md: "0" }} width={{ base: "auto", md: "146px" }} borderWidth="1px" bg="white" _hover={{ bg: "#E2E8F0" }}>
                     login
                   </Link>
-                  <Link href="/signup" fontWeight="500" display="flex" alignItems="center" justifyContent="center" borderRadius="full" h="40px" p={{ base: "0 16px", md: "0" }} width={{ base: "auto", md: "146px" }} color="white" bg="black" _hover={{ bg: "#222222" }}>
+                  <Link href="/signup" fontWeight="500" display="flex" alignItems="center" justifyContent="center" borderRadius="full" h="40px" p={{ base: "0 16px", md: "0" }} width={{ base: "auto", md: "146px" }} color="white" bg="black" _hover={{ bg: "#222429" }}>
                     get started
                   </Link>
                 </Flex>

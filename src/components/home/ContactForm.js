@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/swiper-bundle.css";
 
-import contactFormBg from "../../assets/contact-form-image.png";
-import contactFormBgMob from "../../assets/contact-form-image-mob.png";
 import Footer from "../Footer";
 
 const ContactForm = ({ fullscreen = false, opacity = 1 }) => {
@@ -110,6 +108,7 @@ const ContactForm = ({ fullscreen = false, opacity = 1 }) => {
                   onClick={() => {
                     instagramHandle === "" ? setInstagramHandleError(true) : window.open(`/join?handle=${instagramHandle}`)
                   }}
+                  _hover={{ bg: "#222429" }}
                 >
                   create your hoo.be
                 </Button>

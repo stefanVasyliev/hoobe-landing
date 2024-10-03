@@ -8,6 +8,7 @@ import useWindowWidth from '../../src/hooks/useWindowWidth';
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
 import { InView } from 'react-intersection-observer';
+import { fetchRequest } from '../../src/api';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -18,18 +19,22 @@ const fadeInUp = {
 function Article() {
   const windowWidth = useWindowWidth();
   const { articleId } = useParams();
-  const [article, setArticle] = useState();
+  const [pageContent, setPageContent] = useState();
   const [headings, setHeadings] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     if (articleId) {
-      fetch(process.env.REACT_APP_API_HOST + `/api/articles/${articleId}?populate=*`)
-        .then((response) => response.json())
-        .then(({ data }) => {
-          if (data.id) {
 
+      const getData = async () => {
+        try {
+          const { data } = await fetchRequest(`articles/${articleId}?populate=*`);
+          const articlesData = await fetchRequest(`articles?filters[tags][tagName]=${data.tags[0].tagName}&populate=*`);
+
+          setFilteredArticles(articlesData.data)
+
+          if (data.id) {
             const resultHtml = data.content.replace(
               /<h([1-6])>(.*?)<\/h\1>/g,
               (match, level, text) => {
@@ -37,12 +42,12 @@ function Article() {
                 const id = originalText.toLowerCase()
                   .replace(/^[\W\d]{0,4}/, "")
                   .replace(/\s+/g, "-")
-                  .replace(/[^\w\-]/g, "");
+                  .replace(/[^\w-]/g, "");
                 return `<h${level} id="${id}">${originalText}</h${level}>`;
               }
             );
 
-            setArticle({ ...data, content: resultHtml });
+            setPageContent({ ...data, content: resultHtml });
 
             const parser = new DOMParser();
             const doc = parser.parseFromString(resultHtml, 'text/html');
@@ -69,19 +74,13 @@ function Article() {
             const headingElements = [...doc.querySelectorAll('h2, h3')];
             const newHeadings = createHeadingTree(headingElements);
 
-            fetch(process.env.REACT_APP_API_HOST + `/api/articles?filters[tags][tagName]=${data.tags[0].tagName}&populate=*`)
-              .then((response) => response.json())
-              .then(({ data }) =>
-                setFilteredArticles(data.map((article) => ({ ...article, previewImage: `${process.env.REACT_APP_API_HOST}${article.previewImage.formats.medium.url}` })))
-              )
-              .catch((error) => console.log(error));
-
             setHeadings(newHeadings);
           }
-        })
-        .catch((error) => console.log(error));
+        } catch (err) {
+        } finally { }
+      }
 
-
+      getData();
     }
   }, [articleId]);
 
@@ -95,7 +94,7 @@ function Article() {
     }
   };
 
-  if (!article) return null;
+  if (!pageContent) return null;
 
   return (
     <Layout page="info">
@@ -117,11 +116,11 @@ function Article() {
             alignItems="center"
             gap="12px"
           >
-            {DateTime.fromISO(article.createdAt).toFormat("MMM dd yyyy")}
+            {DateTime.fromISO(pageContent.createdAt).toFormat("MMM dd yyyy")}
             <svg width="4" height="4" viewBox="0 0 4 4" fill="none">
               <circle cx="2" cy="2" r="2" fill="#70757D" />
             </svg>
-            {article.timeRead || 2} min read
+            {pageContent.timeRead || 2} min read
           </Flex>
 
           <Heading
@@ -134,7 +133,7 @@ function Article() {
             letterSpacing="-1.5px"
             maxW="800px"
           >
-            {article.title}
+            {pageContent.title}
           </Heading>
 
           <Flex
@@ -148,7 +147,7 @@ function Article() {
             borderTop="1px solid #E6E7EB"
             flexWrap="wrap"
           >
-            {article.tags.map((category, index) => (
+            {pageContent.tags.map((category, index) => (
               <Box
                 as="span"
                 key={index}
@@ -297,7 +296,7 @@ function Article() {
           }
 
           <Box className="single-article-content">
-            <article dangerouslySetInnerHTML={{ __html: article.content }} />
+            <article dangerouslySetInnerHTML={{ __html: pageContent.content }} />
           </Box>
         </Flex>
 
@@ -325,7 +324,7 @@ function Article() {
               Recommended Resources
             </Heading>
 
-            <InView key={article.slug} triggerOnce>
+            <InView triggerOnce>
               {({ inView, ref }) => (
                 <Grid templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }} gap="40px">
                   {filteredArticles.map((articleItem, index) =>

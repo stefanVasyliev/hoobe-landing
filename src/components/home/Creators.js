@@ -48,7 +48,7 @@ const Creators = () => {
   const { scrollYProgress } = useScroll({ target: creatorsRef });
 
   const screenMiddle = screenWidth / 2;
-  const badgesMiddle = 1750 - screenMiddle;
+  const badgesMiddle = Math.floor(1750 - screenMiddle);
 
   const y = useTransform(scrollYProgress, [0, 0.3], [screenMiddle, -badgesMiddle]);
   const scale = useTransform(scrollYProgress, [0.3, 2], [1, 100]);

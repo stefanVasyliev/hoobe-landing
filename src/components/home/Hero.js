@@ -165,6 +165,7 @@ const Hero = () => {
                         lineHeight="24px"
                         p={{ base: "6px 10px", lg: "14px 16px" }}
                         color="grays.white"
+                        _hover={{ bg: "#222429" }}
                       >
                         {windowWidth > 991 ? "create your hoo.be" : "create"}
                       </Button>

@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { Heading, Box, Flex, Text, Drawer, DrawerOverlay, DrawerContent, DrawerBody, useDisclosure } from "@chakra-ui/react";
 import { DateTime } from "luxon";
 import useWindowWidth from '../../src/hooks/useWindowWidth';
+import { fetchRequest } from '../../src/api';
 
 function Terms() {
   const windowWidth = useWindowWidth();
@@ -11,12 +12,10 @@ function Terms() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_HOST + `/api/terms-of-service`)
-      .then((response) => response.json())
-
-      .then(({ data }) => {
+    const getData = async () => {
+      try {
+        const { data } = await fetchRequest(`terms-of-service`);
         if (data.id) {
-
           const resultHtml = data.content.replace(
             /<h([1-6])>(.*?)<\/h\1>/g,
             (match, level, text) => {
@@ -24,7 +23,7 @@ function Terms() {
               const id = originalText.toLowerCase()
                 .replace(/^[\W\d]{0,4}/, "")
                 .replace(/\s+/g, "-")
-                .replace(/[^\w\-]/g, "");
+                .replace(/[^\w-]/g, "");
               return `<h${level} id="${id}">${originalText}</h${level}>`;
             }
           );
@@ -58,10 +57,11 @@ function Terms() {
 
           setHeadings(newHeadings);
         }
-      })
-      .catch((error) => console.log(error));
+      } catch (err) {
+      } finally { }
+    }
 
-
+    getData();
   }, []);
 
   const smoothScrollTo = (id) => {
@@ -163,7 +163,7 @@ function Terms() {
                 position="fixed"
                 bottom="0"
                 alignItems="center"
-                  zIndex="100"
+                zIndex="100"
                 backgroundColor="white.reg"
                 w="100%"
                 p="20px"
